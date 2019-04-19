@@ -1,0 +1,250 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <link href="~/Content/fonts.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script type="text/javascript" async="async" src="~/Scripts/slides.js"></script>
+    <script type="text/javascript" async="async" src="~/Scripts/jquery.qrcode.min.js"></script>
+    <script type="text/javascript" async="async" src="~/Scripts/sticky.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery-ias.js"></script>
+    <script type="text/javascript" async="async" src="~/Scripts/jquery.lazyload.js"></script>
+    <script type="text/javascript" async="async" src="~/Scripts/tipso.js"></script>
+    <script type="text/javascript" src="~/Scripts/script.js"></script>
+    <script type="text/javascript" async="async" src="~/Scripts/flexisel.js"></script>
+    <script type="text/javascript" async="async" src="~/Scripts/wpzm.js"></script>
+    <style>
+        .theiaStickySidebar:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
+</head>
+<body class="home blog paged paged-4" style="transform: none;">
+    <div id="page" class="hfeed site" style="transform: none;">
+        <header id="masthead" class="site-header">
+
+            <nav id="top-header">
+                <div class="top-nav">
+                    <div id="user-profile">
+                        <div class="user-login">欢迎光临！</div>
+
+                        <div class="nav-set">
+                            <div class="nav-login">
+                                <a href="http://www.dustyblog.cn/page/4/#login" class="flatbtn" id="login-main"><i class="fa fa-sign-in"></i>登录</a>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="menu-container">
+                        <ul id="menu-mof" class="top-menu">
+                            <li id="menu-item-47" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-47"><a href="javascript:"><i class="fa-paperclip fa"></i><span class="font-text">收藏夹</span></a></li>
+                            <li id="menu-item-49" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-49"><a href="javascript:"><i class="fa-file-text-o fa"></i><span class="font-text">文章归档</span></a></li>
+                            <li id="menu-item-50" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-50"><a href="javascript:"><i class="fa-link fa"></i><span class="font-text">友情链接</span></a></li>
+                            <li id="menu-item-188" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-188"><a href="javascript:"><i class="fa-globe fa-fw fa-spin fa"></i><span class="font-text">网站历程</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav><!-- #top-header -->
+
+            <div id="menu-box" class="">
+                <div id="top-menu">
+                    <span class="nav-search"><i class="fa fa-search"></i></span>
+                    <div class="logo-sites">
+                        <h1 class="site-title"><a href="http://www.dustyblog.cn/" title="风尘博客" rel="home">南音雨阁</a></h1>
+                        <p class="site-description">一个.NET程序员的个人博客网站</p>
+                    </div><!-- .logo-site -->
+
+                    <div id="site-nav-wrap">
+                        <div id="sidr-close"><a href="http://www.dustyblog.cn/page/4/#sidr-close" class="toggle-sidr-close">×</a></div>
+                        <nav id="site-nav" class="main-nav">
+                            <a href="http://www.dustyblog.cn/page/4/#sidr-main" id="navigation-toggle" class="bars"><i class="fa fa-bars"></i></a>
+                            <div class="menu-container">
+                                <ul id="menu-nav" class="down-menu nav-menu">
+                                    <li id="menu-item-45" class="menu-item menu-item-type-custom menu-item-object-custom @((ViewBag.Hove as string).Equals("Home")?"current-menu-item menu-item-home":"") menu-item-45"><a href="/Home"><i class="fa-home fa"></i><span class="font-text">首页</span></a></li>
+                                    <li id="menu-item-19" class="menu-item menu-item-type-taxonomy menu-item-object-category @((ViewBag.Hove as string).Equals("article")?"current-menu-item menu-item-home":"") menu-item-19"><a href="/article"><i class="fa-coffee fa"></i><span class="font-text">.NET开发</span></a></li>
+                                    <li id="menu-item-43" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-43"><a href="http://www.dustyblog.cn/linux/"><i class="fa-code fa"></i><span class="font-text">Linux编程</span></a></li>
+                                    <li id="menu-item-224" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-224"><a href="http://www.dustyblog.cn/data-base/"><i class="fa-database fa"></i><span class="font-text">数据算法</span></a></li>
+                                    <li id="menu-item-41" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-41"><a href="http://www.dustyblog.cn/website/"><i class="fa-laptop fa"></i><span class="font-text">网站建设</span></a></li>
+                                    <li id="menu-item-26" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-26"><a href="http://www.dustyblog.cn/more/"><i class="fa-th-large fa"></i><span class="font-text">More</span></a></li>
+                                    <li id="menu-item-46" class="menu-item menu-item-type-post_type menu-item-object-page  @((ViewBag.Hove as string).Equals("comments")?"current-menu-item menu-item-home":"") menu-item-46"><a href="/comments"><i class="fa-comments-o fa"></i><span class="font-text">留言板</span></a></li>
+                                </ul>
+                            </div>
+                        </nav><!-- #site-nav -->
+                    </div><!-- #site-nav-wrap -->
+                    <div class="clear"></div>
+                </div><!-- #top-menu -->
+            </div><!-- #menu-box -->
+        </header><!-- #masthead -->
+        <div class="count-body">
+            @RenderBody()
+        </div>
+        <div id="footer-widget-box" class="site-footer wow fadeInUp" data-wow-delay="0.3s">
+            <div class="footer-widget">
+                <aside id="custom_html-7" class="widget_text widget widget_custom_html wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="textwidget custom-html-widget">
+                        <div class="clear blog-footer">
+                            <div class="container">
+                                <div class="col-xs-12 col-sm-4 col-md-4 text-left fade-in">
+                                    <h4>页面导航</h4>
+                                    <ul class="list-unstyled list-inline">
+                                        <li>
+                                            <a href="http://www.dustyblog.cn/friendlylinks.html" target="_blank" title="" data-toggle="tooltip" data-placement="bottom" rel="external nofollow" data-original-title="友链列表"><i class="fa fa-fw fa-link"></i>&nbsp;友链列表</a>
+                                        </li>
+                                        <li>
+                                            <a href="http://www.dustyblog.cn/messageboard.html" target="_blank" title="" data-toggle="tooltip" data-placement="bottom" rel="external nofollow" data-original-title="留言板"><i class="fa fa-fw fa-comments-o"></i>&nbsp;留言板</a>
+                                        </li>
+                                        <li>
+                                            <a href="http://www.dustyblog.cn/history.html" target="_blank" title="" data-toggle="tooltip" data-placement="bottom" rel="external nofollow" data-original-title="网站历程"><i class="fa fa-globe fa-fw fa-spin"></i>&nbsp;网站历程</a>
+                                        </li>
+                                        <li>
+                                            <a href="http://www.dustyblog.cn/articlelist.html" target="_blank" title="" data-toggle="tooltip" data-placement="bottom" data-original-title="文章归档"><i class="fa fa-folder-o fa-fw"></i>&nbsp;文章归档</a>
+                                        </li>
+                                        <li>
+                                            <a href="http://www.dustyblog.cn/readers.html" title="" data-toggle="tooltip" data-placement="bottom" data-original-title="读者墙"><i class="fa fa-fw fa-user-o"></i>&nbsp;读者墙</a>
+                                        </li>
+                                        <li>
+                                            <a href="http://www.dustyblog.cn/tags.html" title="" data-toggle="tooltip" data-placement="bottom" data-original-title="全部标签"><i class="fa fa-tags fa-fw"></i>&nbsp;全部标签</a>
+                                        </li>
+                                        <li>
+                                            <a href="http://www.dustyblog.cn/code-highlighting.html" title="" data-toggle="tooltip" data-placement="bottom" data-original-title="代码高亮"><i class="fa fa-fw fa-code "></i>&nbsp;代码高亮</a>
+                                        </li>
+                                        <li>
+                                            <a href="http://www.dustyblog.cn/collection.html" title="" data-toggle="tooltip" data-placement="bottom" data-original-title="收藏夹"><i class="fa fa-fire fa-fw red"></i>&nbsp;收藏夹</a>
+                                        </li>
+                                        <li>
+                                            <a href="https://portal.qiniu.com/signup?code=3lptvlv5vvihe" title="" data-toggle="tooltip" data-placement="bottom" data-original-title="加入七牛"><i class="fa fa-telegram fa-fw"></i>&nbsp;加入七牛</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div><div class="clear"></div>
+                </aside><aside id="custom_html-8" class="widget_text widget widget_custom_html wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="textwidget custom-html-widget">
+                        <div class="clear blog-footer">
+                            <div class="myDescription">
+                                <div class="aboutMe">
+                                    <h4>关于本站</h4>
+                                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<p class="myDescription" style="margin-top:-15px;">本站定位：个人笔记</p>
+                                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<p class="myDescription" style="margin-top:-20px;">本站作用：记录博主搬砖的历程；分享自己所知/所不知，如果恰好也帮助了你，深感荣幸！</p>
+                                </div>
+                                <div class="communion">
+                                    <h4>问题交流</h4>
+                                    <img class="weChat" src="~/image/WeChat.jpg">
+                                </div>
+                            </div>
+                        </div>
+                    </div><div class="clear"></div>
+                </aside>		<div class="clear"></div>
+            </div>
+        </div>
+
+        <footer id="colophon" class="site-footer wow fadeInUp" data-wow-delay="0.3s" role="contentinfo">
+            <div class="site-info">
+                Copyright ©&nbsp; 风尘博客&nbsp; 2017-2018&nbsp;&nbsp;<a href="http://www.miitbeian.gov.cn/" target="_blank" rel="noopener">浙ICP备18016950号&nbsp;</a>			<span class="add-info">
+                    托管于&nbsp; <a href="https://promotion.aliyun.com/ntms/act/ambassador/sharetouser.html?userCode=6c7rnmqk&amp;utm_source=6c7rnmqk" target="_blank" rel="noopener">阿里云</a> &amp; <a href="https://www.qiniu.com/" target="_blank" rel="noopener">七牛云</a>&nbsp;&nbsp;&nbsp;<a href="https://tongji.baidu.com/web/welcome/ico?s=81a29d41b4b1a5e702f75e54d9c9d52d" target="_blank" rel="noopener"><img src="~/image/BaiduCount.gif"></a>
+                </span>
+                站点已稳定运行：<span id="span_dt_dt" style="color: #2F889A;"><font style="color:#C40000">208</font> 天 <font style="color:#C40000">22</font> 时 <font style="color:#C40000">35</font> 分 <font style="color:#C40000">17</font> 秒</span>
+                <script language="javascript">
+                    function show_date_time() {
+                        window.setTimeout("show_date_time()", 1000);
+                        BirthDay = new Date("7/12/2018 00:00:00");
+                        today = new Date();
+                        timeold = (today.getTime() - BirthDay.getTime());
+                        sectimeold = timeold / 1000
+                        secondsold = Math.floor(sectimeold);
+                        msPerDay = 24 * 60 * 60 * 1000
+                        e_daysold = timeold / msPerDay
+                        daysold = Math.floor(e_daysold);
+                        e_hrsold = (e_daysold - daysold) * 24;
+                        hrsold = Math.floor(e_hrsold);
+                        e_minsold = (e_hrsold - hrsold) * 60;
+                        minsold = Math.floor((e_hrsold - hrsold) * 60);
+                        seconds = Math.floor((e_minsold - minsold) * 60);
+                        span_dt_dt.innerHTML = '<font style=color:#C40000>' + daysold + '</font> 天 <font style=color:#C40000>' + hrsold + '</font> 时 <font style=color:#C40000>' + minsold + '</font> 分 <font style=color:#C40000>' + seconds + '</font> 秒';
+                    }
+                    show_date_time();</script>
+            </div><!-- .site-info -->
+        </footer><!-- .site-footer -->
+        <div id="login">
+
+            <div id="login-tab" class="login-tab-product">
+                <h2 class="login-tab-hd">
+                    <span class="login-tab-hd-con login-current"><a href="javascript:">登录</a></span>
+                </h2>
+
+                <div class="login-tab-bd login-dom-display">
+                    <div class="login-tab-bd-con login-current">
+                        <div id="tab1_login" class="tab_content_login">
+                            <form method="post" action="http://www.dustyblog.cn/wp-login.php" class="wp-user-form">
+                                <div class="username">
+                                    <label for="user_login">用户名</label>
+                                    <input type="text" name="log" value="" size="20" id="user_login" tabindex="11">
+                                </div>
+                                <div class="password">
+                                    <label for="user_pass">密码</label>
+                                    <input type="password" name="pwd" value="" size="20" id="user_pass" tabindex="12">
+                                </div>
+                                <div class="login-form"></div>
+                                <div class="login_fields">
+                                    <div class="rememberme">
+                                        <label for="rememberme">
+                                            <input type="checkbox" name="rememberme" value="forever" checked="checked" id="rememberme" tabindex="13">记住我的登录信息
+                                        </label>
+                                    </div>
+                                    <input type="submit" name="user-submit" value="登录" tabindex="14" class="user-submit">
+                                    <input type="hidden" name="redirect_to" value="/page/4/">
+                                    <input type="hidden" name="user-cookie" value="1">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <ul id="scroll">
+            <li class="log log-no"><a class="log-button" title="文章目录"><i class="fa fa-bars"></i></a><div class="log-prompt" style="display: none;"><div class="log-arrow">文章目录</div></div></li>
+            <li><a class="scroll-h" title="返回顶部"><i class="fa fa-angle-up"></i></a></li>
+            <li><a class="scroll-b" title="转到底部"><i class="fa fa-angle-down"></i></a></li>
+            <li class="gb2-site"><a id="gb2big5"><span>繁</span></a></li>
+            <li class="qr-site"><a href="javascript:void(0)" class="qr" title="本页二维码"><i class="fa fa-qrcode"></i><span class="qr-img"><span id="output"><img class="alignnone" src="~/image/favico.png" alt="icon"><canvas width="150" height="150"></canvas></span><span class="arrow arrow-z"><i class="fa fa-caret-right"></i></span><span class="arrow arrow-y"><i class="fa fa-caret-right"></i></span></span></a></li>
+            <script type="text/javascript">$(document).ready(function () { if (!+[1,]) { present = "table"; } else { present = "canvas"; } $('#output').qrcode({ render: present, text: window.location.href, width: "150", height: "150" }); });</script>
+        </ul>
+        <script type="text/javascript">
+            document.onkeydown = chang_page; function chang_page(e) {
+                var e = e || event,
+                    keycode = e.which || e.keyCode;
+                if (keycode == 37) location = 'http://www.dustyblog.cn/page/3/';
+                if (keycode == 39) location = 'http://www.dustyblog.cn/page/5/';
+            }
+        </script>
+
+    </div><!-- .site -->
+
+    <script type="text/javascript" language="javascript">
+
+        if (window.console && window.console.log) {
+            console.log('猿兄！居然想看我的源码！');
+            console.log("%c真想看的话，告诉我嘛：http://www.dustyblog.cn/messageboard.html", "color:red");
+        }
+    </script>
+
+
+    <!-- Dynamic page generated in 0.494 seconds. -->
+    <!-- Cached page generated by WP-Super-Cache on 2018-07-12 22:35:08 -->
+    <!-- Compression = gzip --><div id="overlay"></div>
+</body>
+</html>

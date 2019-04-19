@@ -1,0 +1,487 @@
+﻿
+@{
+    ViewBag.Title = "南音雨阁|文章详情";
+    ViewBag.Hove = "detail";
+    Layout = "~/Views/Shared/_LopLayout.cshtml";
+}
+<div id="search-main" class="shadow">
+    <div class="searchbar">
+        <form method="get" id="searchform" action="http://www.dustyblog.cn/">
+            <span>
+                <input type="text" value="" name="s" id="s" placeholder="输入搜索内容" required="">
+                <button type="submit" id="searchsubmit">搜索</button>
+            </span>
+
+        </form>
+    </div>		<div class="clear"></div>
+</div>					<nav class="breadcrumb">
+    <a class="crumbs" href="http://www.dustyblog.cn/"><i class="fa fa-home"></i>首页</a><i class="fa fa-angle-right"></i><a href="http://www.dustyblog.cn/data-base/">数据算法</a><i class="fa fa-angle-right"></i><a href="http://www.dustyblog.cn/data-base/%e6%95%b0%e6%8d%ae%e5%ba%93/" rel="category tag">数据库</a><i class="fa fa-angle-right"></i>正文
+</nav>
+
+<div id="content" class="site-content shadow" style="transform: none;">
+    <div id="primary" class="content-area">
+        <main id="main" class="site-main" role="main">
+
+
+            <article id="post-560" class="post-560 post type-post status-publish format-standard hentry category-64 tag-65 rvy">
+                <header class="entry-header">
+                    <h1 class="entry-title">JS 全选操作及 SQL 批量操作示例</h1>
+                </header><!-- .entry-header -->
+
+                <div class="entry-content">
+
+                    <div class="begin-single-meta"><span class="my-date"><i class="fa fa-clock-o"></i> 2018年7月20日<i class="i-time">12:29:28</i></span><span class="comment"><a href="http://www.dustyblog.cn/560.html#respond" rel="external nofollow"><i class="fa fa-comment-o"></i> 发表评论</a></span><span class="views"><i class="fa fa-eye"></i> 7</span><span class="print"><a href="javascript:printme()" target="_self" title="打印"><i class="fa fa-print"></i></a></span><span class="s-hide r-hide"><a href="javascript:pr()" title="侧边栏"><i class="fa fa-caret-left"></i> <i class="fa fa-caret-right"></i></a></span></div>
+                    <div class="single-content">
+                        <span class="abstract">
+                            <fieldset>
+                                <legend>摘要</legend><p>常用到的多选及其批量操作，之前都用的是循环单个,这次好好整理下，顺便将js全选操作做个记录，以便后续使用。</p>
+                                <div class="clear"></div>
+                            </fieldset>
+                        </span>
+
+                        <h2>一、Sql 语句</h2>
+                        <p>批量示例：</p>
+                        <div class="dp-highlighter">
+                            <div class="bar"></div>
+                            <ol class="dp-xml" start="1">
+                                <li class="alt">UPDATE&nbsp;capacity_task</li>
+                                <li class="">SET&nbsp;<span class="attribute">state</span>&nbsp;=&nbsp;<span class="attribute-value">1</span></li>
+                                <li class="alt">WHERE&nbsp;&nbsp;id&nbsp;in&nbsp;(18,19,20)</li>
+                            </ol>
+                        </div>
+                        <h2>二、前端 JS 代码</h2>
+                        <h3>2.1、首先，将每一列设置一个单选框和一个全选框</h3>
+                        <div class="dp-highlighter">
+                            <div class="bar"></div>
+                            <ol class="dp-c" start="1">
+                                <li class="alt"><span class="comment">//选择列的格式</span></li>
+                                <li class=""><span class="keyword">function</span>&nbsp;checkbox(value,row,index)&nbsp;{</li>
+                                <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;['&lt;input&nbsp;type=<span class="string">"checkbox"</span>&nbsp;name=<span class="string">"checkname"</span>&nbsp;&nbsp;value='+row.id+'&nbsp;style=<span class="string">"zoom:&nbsp;150%"</span>&gt;'].join(<span class="string">''</span>);</li>
+                                <li class="">}</li>
+                                <li class="alt"><span class="comment">//全选操作</span></li>
+                                <li class="">$(<span class="string">"#checkall"</span>).click(</li>
+                                <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">function</span>(){</li>
+                                <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>(<span class="keyword">this</span>.checked){</li>
+                                <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//将全部选中</span></li>
+                                <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$(<span class="string">"input[name='checkname']"</span>).prop(<span class="string">"checked"</span>,&nbsp;$(<span class="keyword">this</span>).prop(<span class="string">"checked"</span>));</li>
+                                <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<span class="keyword">else</span>{</li>
+                                <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;再次点击，取消选中状态</span></li>
+                                <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$(<span class="string">"input[name='checkname']"</span>).attr('checked',&nbsp;<span class="keyword">false</span>);</li>
+                                <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</li>
+                                <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;}</li>
+                                <li class="">);</li>
+                            </ol>
+                        </div>
+                        <h3>2.2、然后，判断是否选中，发送异步请求</h3>
+                        <div class="dp-highlighter">
+                            <div class="bar"></div>
+                            <ol class="dp-c" start="1">
+                                <li class="alt">$(<span class="string">".upLoadBtn"</span>).on('click',<span class="keyword">function</span>&nbsp;()&nbsp;{</li>
+                                <li class="">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//记录批量操作按钮文本</span></li>
+                                <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;checkType=$(<span class="keyword">this</span>).text();</li>
+                                <li class="">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//监听是否有选中</span></li>
+                                <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;checkedAny&nbsp;=&nbsp;<span class="keyword">false</span>;</li>
+                                <li class="">&nbsp;&nbsp;&nbsp;&nbsp;$(<span class="string">":checkbox"</span>).each(<span class="keyword">function</span>(){</li>
+                                <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>(<span class="keyword">this</span>.checked&nbsp;==&nbsp;<span class="keyword">true</span>){</li>
+                                <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;批量下线操作</span></li>
+                                <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>(checkType==<span class="string">"下线"</span>)&nbsp;{</li>
+                                <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;swal({</li>
+                                <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title:&nbsp;<span class="string">"您确定将选中的任务&lt;span&nbsp;style='color:red;'&gt;全部下线&lt;/span&gt;吗？"</span>,</li>
+                                <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text:&nbsp;<span class="string">"&lt;span&nbsp;style='color:green;'&gt;&lt;/span&gt;"</span>,</li>
+                                <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type:&nbsp;<span class="string">"warning"</span>,</li>
+                                <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;html:&nbsp;<span class="keyword">true</span>,</li>
+                                <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;showCancelButton:&nbsp;<span class="keyword">true</span>,</li>
+                                <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;confirmButtonColor:&nbsp;<span class="string">"#DD6B55"</span>,</li>
+                                <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;confirmButtonText:&nbsp;<span class="string">"确定"</span>,</li>
+                                <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cancelButtonText:&nbsp;<span class="string">"取消"</span>,</li>
+                                <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;closeOnConfirm:&nbsp;<span class="keyword">true</span>,</li>
+                                <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;closeOnCancel:&nbsp;<span class="keyword">false</span></li>
+                                <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},</li>
+                                <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">function</span>&nbsp;(isConfirm)&nbsp;{</li>
+                                <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(isConfirm)&nbsp;{</li>
+                                <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;idList&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;Array();</li>
+                                <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;groupCheckbox&nbsp;=&nbsp;$(<span class="string">"input[name='checkname']"</span>);</li>
+                                <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(<span class="keyword">var</span>&nbsp;i&nbsp;=&nbsp;0;&nbsp;i&nbsp;&lt;&nbsp;groupCheckbox.length;&nbsp;i++)&nbsp;{</li>
+                                <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(groupCheckbox[i].checked)&nbsp;{</li>
+                                <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;id&nbsp;=&nbsp;groupCheckbox[i].value;</li>
+                                <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;idList.push(id);</li>
+                                <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</li>
+                                <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</li>
+                                <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$.ajax({</li>
+                                <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type:&nbsp;<span class="string">"POST"</span>,</li>
+                                <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;url:&nbsp;<span class="string">"../capacityTask/batchDownTask"</span>,</li>
+                                <li>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // 将 id 集合转成字符串传到后台，后台需将字符串拆分</li>
+                                <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data:&nbsp;{idList:idList.toString()},</li>
+                                <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dataType:&nbsp;<span class="string">"json"</span>,</li>
+                                <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contentType:&nbsp;<span class="string">"application/x-www-form-urlencoded;charset=utf-8"</span>,</li>
+                                <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;success:&nbsp;<span class="keyword">function</span>&nbsp;(ret)&nbsp;{</li>
+                                <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>(ret.code&nbsp;===&nbsp;200)&nbsp;{</li>
+                                <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;swal(<span class="string">"操作成功！"</span>);</li>
+                                <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;initTable();</li>
+                                <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{</li>
+                                <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;showToastr(ret.error)</li>
+                                <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</li>
+                                <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</li>
+                                <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});</li>
+                                <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{</li>
+                                <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;swal(<span class="string">"已取消！"</span>,&nbsp;<span class="string">"您取消了操作！"</span>,&nbsp;<span class="string">"error"</span>);</li>
+                                <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</li>
+                                <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});</li>
+                                <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</li>
+                                <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;checkedAny=<span class="keyword">true</span>;</li>
+                                <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</li>
+                                <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>(checkedAny==<span class="keyword">false</span>){&nbsp;<span class="comment">//一个都没选中</span></li>
+                                <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;swal(<span class="string">"无法操作！"</span>,&nbsp;<span class="string">"请至少选择一个进行操作！"</span>,&nbsp;<span class="string">"error"</span>);</li>
+                                <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</li>
+                                <li class="">&nbsp;&nbsp;&nbsp;&nbsp;});</li>
+                                <li class="alt">})</li>
+                            </ol>
+                        </div>
+                        <h2>三、数据更新操作</h2>
+                        <h3>3.1、DAO 接口</h3>
+                        <div class="dp-highlighter">
+                            <div class="bar"></div>
+                            <ol class="dp-j" start="1">
+                                <li class="alt"><span class="keyword">int</span>&nbsp;batchDownTask(List&lt;Long&gt;&nbsp;id);</li>
+                            </ol>
+                        </div>
+                        <h3>3.2、mapper 映射</h3>
+                        <div class="dp-highlighter">
+                            <div class="bar"></div>
+                            <ol class="dp-xml" start="1">
+                                <li class="alt"><span class="tag">&lt;</span><span class="tag-name">update</span>&nbsp;<span class="attribute">id</span>=<span class="attribute-value">"batchDownTask"</span>&nbsp;<span class="attribute">parameterType</span>=<span class="attribute-value">"java.util.List"</span>&nbsp;<span class="tag">&gt;</span></li>
+                                <li class="">&nbsp;&nbsp;&nbsp;&nbsp;update&nbsp;capacity_task</li>
+                                <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;SET&nbsp;<span class="attribute">state</span>&nbsp;=&nbsp;<span class="attribute-value">0</span></li>
+                                <li class="">&nbsp;&nbsp;&nbsp;&nbsp;WHERE&nbsp;&nbsp;id&nbsp;IN</li>
+                                <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;</span><span class="tag-name">foreach</span>&nbsp;<span class="attribute">collection</span>=<span class="attribute-value">"list"</span>&nbsp;<span class="attribute">item</span>=<span class="attribute-value">"id"</span>&nbsp;<span class="attribute">open</span>=<span class="attribute-value">"("</span>&nbsp;<span class="attribute">close</span>=<span class="attribute-value">")"</span>&nbsp;<span class="attribute">index</span>=<span class="attribute-value">"index"</span>&nbsp;<span class="attribute">separator</span>=<span class="attribute-value">","</span><span class="tag">&gt;</span></li>
+                                <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${id}</li>
+                                <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/</span><span class="tag-name">foreach</span><span class="tag">&gt;</span></li>
+                                <li class="">&nbsp;&nbsp;<span class="tag">&lt;/</span><span class="tag-name">update</span><span class="tag">&gt;</span></li>
+                            </ol>
+                        </div>
+                        <h3></h3>
+                        <div class="favorite-box"><span class="favorite-e"><a class="wpzm-link" href="http://www.dustyblog.cn/560.html?wpzmaction=add&amp;postid=560" rel="nofollow"> 收 <i class="fa-heart fa"></i> 藏</a></span></div>
+                    </div>
+
+
+
+
+                    <div class="s-weixin-one">
+                        <div class="weimg-one">
+                            <img src="~/image/WeChat.jpg" alt="weinxin">
+                            <div class="weixin-h"><strong>我的微信</strong></div>
+                            <div class="weixin-h-w">这是我的微信，如果你对本文感兴趣或者有什么不同的意见，扫一扫告诉我！</div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+
+                    <div id="social"></div>
+
+
+                    <footer class="single-footer">
+                        <ul id="fontsize"><li>A+</li></ul><div class="single-cat-tag"><div class="single-cat">所属分类：<a href="http://www.dustyblog.cn/data-base/%e6%95%b0%e6%8d%ae%e5%ba%93/" rel="category tag">数据库</a></div></div>
+                    </footer><!-- .entry-footer -->
+
+                    <div class="clear"></div>
+                </div><!-- .entry-content -->
+
+            </article><!-- #post -->
+
+            <div class="single-tag"><ul class="wow fadeInUp" data-wow-delay="0.3s"><li><a href="http://www.dustyblog.cn/tag/%e6%89%b9%e9%87%8f%e6%93%8d%e4%bd%9c/" rel="tag" style="background:#f85200">批量操作</a></li></ul></div>
+            <div class="authorbio wow fadeInUp" data-wow-delay="0.3s">
+                <img src="~/image/75991faa95dd88d113a8e30834d40d49" class="avatar avatar-128" height="128" width="128">
+                <ul class="spostinfo">
+                    <li>
+                    </li>
+                    <li><strong>版权声明：</strong>本站原创文章，于2018年7月20日<i class="i-time">12:29:28</i>，由 <b><a href="http://www.dustyblog.cn/author/van/" title="由Van发布" rel="author">Van</a></b> 发表，共 3320 字。</li>
+                    <li class="reprinted"><strong>转载请注明：</strong><a href="http://www.dustyblog.cn/560.html" rel="bookmark" title="本文固定链接 http://www.dustyblog.cn/560.html">JS 全选操作及 SQL 批量操作示例 | 风尘博客</a></li>
+                </ul>
+                <div class="clear"></div>
+            </div>
+
+
+
+
+
+            <nav class="nav-single wow fadeInUp" data-wow-delay="0.3s">
+                <span class="meta-nav"><span class="post-nav">没有了<br></span>已是最后文章</span><span class="meta-nav"><span class="post-nav">没有了<br></span>已是最新文章</span>					<div class="clear"></div>
+            </nav>
+
+
+            <nav class="navigation post-navigation" role="navigation">
+                <h2 class="screen-reader-text">文章导航</h2>
+                <div class="nav-links"><div class="nav-previous"><a href="http://www.dustyblog.cn/554.html" rel="prev"><span class="meta-nav-r" aria-hidden="true"><i class="fa fa-angle-left"></i></span></a></div></div>
+            </nav>
+
+            <!-- 引用 -->
+
+
+            <div class="scroll-comments"></div>
+
+            <div id="comments" class="comments-area">
+
+
+                <div id="respond" class="comment-respond wow fadeInUp" data-wow-delay="0.3s">
+                    <h3 id="reply-title" class="comment-reply-title">发表评论<small><a rel="nofollow" id="cancel-comment-reply-link" href="http://www.dustyblog.cn/560.html#respond" style="display:none;">取消回复</a></small></h3>
+
+
+                    <form action="http://www.dustyblog.cn/wp-comments-post.php" method="post" id="commentform">
+                        <div class="author_avatar">
+                            <img src="~/image/09b0250f4c037a1f8b52bc56e822995a" class="avatar avatar-128" height="128" width="128">						欢迎 <strong>豆豆先生</strong> 再次光临！<br>
+                            <a href="javascript:toggleCommentAuthorInfo();" id="toggle-comment-author-info">修改信息</a>
+                            <script type="text/javascript">
+							//<![CDATA[
+							var changeMsg = "修改信息";
+							var closeMsg = "关闭";
+							function toggleCommentAuthorInfo() {
+								jQuery('#comment-author-info').slideToggle('slow', function(){
+									if ( jQuery('#comment-author-info').css('display') == 'none' ) {
+									jQuery('#toggle-comment-author-info').text(changeMsg);
+									} else {
+									jQuery('#toggle-comment-author-info').text(closeMsg);
+									}
+								});
+							}
+							jQuery(document).ready(function(){
+								jQuery('#comment-author-info').hide();
+							});
+							//]]>
+                            </script>
+                        </div>
+
+                        <p class="emoji-box">
+                            <script type="text/javascript">
+/* <![CDATA[ */
+    function grin(tag) {
+    	var myField;
+    	tag = ' ' + tag + ' ';
+        if (document.getElementById('comment') && document.getElementById('comment').type == 'textarea') {
+    		myField = document.getElementById('comment');
+    	} else {
+    		return false;
+    	}
+    	if (document.selection) {
+    		myField.focus();
+    		sel = document.selection.createRange();
+    		sel.text = tag;
+    		myField.focus();
+    	}
+    	else if (myField.selectionStart || myField.selectionStart == '0') {
+    		var startPos = myField.selectionStart;
+    		var endPos = myField.selectionEnd;
+    		var cursorPos = endPos;
+    		myField.value = myField.value.substring(0, startPos)
+    					  + tag
+    					  + myField.value.substring(endPos, myField.value.length);
+    		cursorPos += tag.length;
+    		myField.focus();
+    		myField.selectionStart = cursorPos;
+    		myField.selectionEnd = cursorPos;
+    	}
+    	else {
+    		myField.value += tag;
+    		myField.focus();
+    	}
+    }
+/* ]]> */
+                            </script>
+
+                            <a href="javascript:grin(&#39;:?:&#39;)"><img src="~/image/icon_question.gif" alt=":?:" title="疑问"></a>
+                            <a href="javascript:grin(&#39;:razz:&#39;)"><img src="~/image/icon_razz.gif" alt=":razz:" title="调皮"></a>
+                            <a href="javascript:grin(&#39;:sad:&#39;)"><img src="~/image/icon_sad.gif" alt=":sad:" title="难过"></a>
+                            <a href="javascript:grin(&#39;:evil:&#39;)"><img src="~/image/icon_evil.gif" alt=":evil:" title="抠鼻"></a>
+                            <a href="javascript:grin(&#39;:!:&#39;)"><img src="~/image/icon_exclaim.gif" alt=":!:" title="吓"></a>
+                            <a href="javascript:grin(&#39;:smile:&#39;)"><img src="~/image/icon_smile.gif" alt=":smile:" title="微笑"></a>
+                            <a href="javascript:grin(&#39;:oops:&#39;)"><img src="~/image/icon_redface.gif" alt=":oops:" title="憨笑"></a>
+                            <a href="javascript:grin(&#39;:grin:&#39;)"><img src="~/image/icon_biggrin.gif" alt=":grin:" title="坏笑"></a>
+                            <a href="javascript:grin(&#39;:eek:&#39;)"><img src="~/image/icon_surprised.gif" alt=":eek:" title="惊讶"></a>
+                            <a href="javascript:grin(&#39;:shock:&#39;)"><img src="~/image/icon_eek.gif" alt=":shock:" title="发呆"></a>
+                            <a href="javascript:grin(&#39;:???:&#39;)"><img src="~/image/icon_confused.gif" alt=":???:" title="撇嘴"></a>
+                            <a href="javascript:grin(&#39;:cool:&#39;)"><img src="~/image/icon_cool.gif" alt=":cool:" title="大兵"></a>
+                            <a href="javascript:grin(&#39;:lol:&#39;)"><img src="~/image/icon_lol.gif" alt=":lol:" title="偷笑"></a>
+                            <a href="javascript:grin(&#39;:mad:&#39;)"><img src="~/image/icon_mad.gif" alt=":mad:" title="咒骂"></a>
+                            <a href="javascript:grin(&#39;:twisted:&#39;)"><img src="~/image/icon_twisted.gif" alt=":twisted:" title="发怒"></a>
+                            <a href="javascript:grin(&#39;:roll:&#39;)"><img src="~/image/icon_rolleyes.gif" alt=":roll:" title="白眼"></a>
+                            <a href="javascript:grin(&#39;:wink:&#39;)"><img src="~/image/icon_wink.gif" alt=":wink:" title="鼓掌"></a>
+                            <a href="javascript:grin(&#39;:idea:&#39;)"><img src="~/image/icon_idea.gif" alt=":idea:" title="酷"></a>
+                            <a href="javascript:grin(&#39;:arrow:&#39;)"><img src="~/image/icon_arrow.gif" alt=":arrow:" title="擦汗"></a>
+                            <a href="javascript:grin(&#39;:neutral:&#39;)"><img src="~/image/icon_neutral.gif" alt=":neutral:" title="亲亲"></a>
+                            <a href="javascript:grin(&#39;:cry:&#39;)"><img src="~/image/icon_cry.gif" alt=":cry:" title="大哭"></a>
+                            <a href="javascript:grin(&#39;:mrgreen:&#39;)"><img src="~/image/icon_mrgreen.gif" alt=":mrgreen:" title="呲牙"></a>
+                            <br>
+                        </p>
+                        <p class="comment-form-comment"><textarea id="comment" name="comment" rows="4" tabindex="1"></textarea><div id="loading" style="display: none;"><i class="fa fa-spinner"></i>正在提交, 请稍候...</div><div id="error" style="display: none;">#</div></p>
+
+                        <p class="comment-tool">
+                            <a class="tool-img" href="javascript:embedImage();" title="插入图片"><i class="icon-img"></i><i class="fa fa-picture-o"></i></a>
+                            <a class="emoji" href="http://www.dustyblog.cn/560.html" title="插入表情"><i class="fa fa-meh-o"></i></a>
+                        </p>
+
+
+                        <div id="comment-author-info" style="display: none;">
+                            <p class="comment-form-author">
+                                <label for="author">昵称<span class="required">*</span></label>
+                                <input type="text" name="author" id="author" class="commenttext" value="豆豆先生" tabindex="2">
+                            </p>
+                            <p class="comment-form-email">
+                                <label for="email">邮箱<span class="required">*</span></label>
+                                <input type="text" name="email" id="email" class="commenttext" value="781937858@qq.com" tabindex="3">
+                            </p>
+                            <p class="comment-form-url">
+                                <label for="url">网址</label>
+                                <input type="text" name="url" id="url" class="commenttext" value="http://www.tengyunge.cn/" tabindex="4">
+                            </p>
+                            <p class="comment-form-qq">
+                                <label for="qq">QQ</label>
+                                <input id="qq" name="qq" type="text" value="" size="30" placeholder="输入QQ号码可以快速填写">
+                                <span id="loging"></span>
+                            </p>
+                        </div>
+                        <div class="qaptcha"><div class="bgslider"><div class="slider ui-draggable ui-draggable-handle" style="position: relative;"></div></div><div class="Icons"></div><div class=" txtstatus droperror">滑动解锁才能提交</div><div class="clr"></div><input name="rp4XCUDb8DvEXhc8HPg6FX8wv2n64qAq" value="mdF7Mmw" type="hidden"></div>
+
+                        <div class="clear"></div>
+                        <p class="form-submit">
+                            <input id="submit" name="submit" type="submit" tabindex="5" value="提交评论">
+                            <input type="hidden" name="comment_post_ID" value="560" id="comment_post_ID">
+                            <input type="hidden" name="comment_parent" id="comment_parent" value="0">
+                        </p>
+
+                        <span class="mail-notify">
+                            <input type="checkbox" name="comment_mail_notify" id="comment_mail_notify" class="notify" value="comment_mail_notify">
+                            <label for="comment_mail_notify"><span>有回复时邮件通知我</span></label>
+                        </span>
+                    </form>
+
+                </div>
+
+
+
+            </div>
+            <!-- #comments -->
+
+        </main><!-- .site-main -->
+    </div><!-- .content-area -->
+
+    <div id="sidebar" class="widget-area all-sidebar" style="position: relative; overflow: visible; box-sizing: border-box; min-height: 3165px;">
+
+
+
+
+        <div class="theiaStickySidebar" style="padding-top: 0px; padding-bottom: 1px; position: fixed; transform: translateY(95px); top: 0px; width: 308.875px; left: 1182.63px;">
+            <aside id="random_post-5" class="widget random_post wow fadeInUp" data-wow-delay="0.3s">
+                <h3 class="widget-title"><i class="fa fa-bars"></i>猜你喜欢</h3>
+                <div id="random_post_widget">
+                    <ul>
+                        <li><a href="http://www.dustyblog.cn/560.html" rel="bookmark">JS 全选操作及 SQL 批量操作示例</a></li>
+                    </ul>
+                </div>
+
+                <div class="clear"></div>
+            </aside><aside id="updated_posts-3" class="widget updated_posts wow fadeInUp" data-wow-delay="0.3s">
+                <h3 class="widget-title"><i class="fa fa-bars"></i>最近更新过的文章</h3>
+                <div class="post_cat">
+                    <ul>
+                        <li><i class="fa fa-angle-right"></i><a href="http://www.dustyblog.cn/546.html" title="西罗列传">西罗列传</a></li>
+                        <li><i class="fa fa-angle-right"></i><a href="http://www.dustyblog.cn/527.html" title="程序员必背调试工具：Postman">程序员必背调试工具：Postman</a></li>
+                        <li><i class="fa fa-angle-right"></i><a href="http://www.dustyblog.cn/356.html" title="Git 进阶（五）：Git 实战 — 上传本地项目到 Github">Git 进阶（五）：Git 实战 — 上传本地项目到 Github</a></li>
+                        <li><i class="fa fa-angle-right"></i><a href="http://www.dustyblog.cn/458.html" title="ElasticSearch （三）Java 创建客户端连接及记录操作示例">ElasticSearch （三）Java 创建客户端连接及记录操作示例</a></li>
+                        <li><i class="fa fa-angle-right"></i><a href="http://www.dustyblog.cn/461.html" title="ElasticSearch （五）文档的增删改查及批量增加">ElasticSearch （五）文档的增删改查及批量增加</a></li>
+                    </ul>
+                </div>
+
+                <div class="clear"></div>
+            </aside><aside id="cx_tag_cloud-4" class="widget cx_tag_cloud wow fadeInUp" data-wow-delay="0.3s">
+                <h3 class="widget-title"><i class="fa fa-bars"></i>标签云</h3>	<div class="tagcloud">
+                    <a href="http://www.dustyblog.cn/tag/%e8%af%97%e8%af%8d/" class="tag-cloud-link tag-link-59 tag-link-position-1" style="font-size: 14px;">诗词</a>
+                    <a href="http://www.dustyblog.cn/tag/%e6%8a%b1%e6%80%a8/" class="tag-cloud-link tag-link-35 tag-link-position-2" style="font-size: 14px;">抱怨</a>
+                    <a href="http://www.dustyblog.cn/tag/postman/" class="tag-cloud-link tag-link-62 tag-link-position-3" style="font-size: 14px;">Postman</a>
+                    <a href="http://www.dustyblog.cn/tag/%e6%9c%8d%e5%8a%a1%e5%99%a8/" class="tag-cloud-link tag-link-49 tag-link-position-4" style="font-size: 14px;">服务器</a>
+                    <a href="http://www.dustyblog.cn/tag/nginx/" class="tag-cloud-link tag-link-36 tag-link-position-5" style="font-size: 14px;">Nginx</a>
+                    <a href="http://www.dustyblog.cn/tag/upload/" class="tag-cloud-link tag-link-45 tag-link-position-6" style="font-size: 14px;">上传文件</a>
+                    <a href="http://www.dustyblog.cn/tag/linux/" class="tag-cloud-link tag-link-55 tag-link-position-7" style="font-size: 14px;">Linux</a>
+                    <a href="http://www.dustyblog.cn/tag/js/" class="tag-cloud-link tag-link-40 tag-link-position-8" style="font-size: 14px;">JS</a>
+                    <a href="http://www.dustyblog.cn/tag/elasticsearch/" class="tag-cloud-link tag-link-58 tag-link-position-9" style="font-size: 14px;">ElasticSearch</a>
+                    <a href="http://www.dustyblog.cn/tag/%e6%b3%a8%e8%a7%a3/" class="tag-cloud-link tag-link-39 tag-link-position-10" style="font-size: 14px;">注解</a>
+                    <a href="http://www.dustyblog.cn/tag/%e6%89%b9%e9%87%8f%e6%93%8d%e4%bd%9c/" class="tag-cloud-link tag-link-65 tag-link-position-11" style="font-size: 14px;">批量操作</a>
+                    <a href="http://www.dustyblog.cn/tag/%e5%8a%a8%e6%bc%ab/" class="tag-cloud-link tag-link-63 tag-link-position-12" style="font-size: 14px;">动漫</a>
+                    <a href="http://www.dustyblog.cn/tag/css/" class="tag-cloud-link tag-link-41 tag-link-position-13" style="font-size: 14px;">CSS</a>
+                    <a href="http://www.dustyblog.cn/tag/%e6%8e%92%e5%ba%8f%e7%ae%97%e6%b3%95/" class="tag-cloud-link tag-link-56 tag-link-position-14" style="font-size: 14px;">排序算法</a>
+                    <a href="http://www.dustyblog.cn/tag/mac/" class="tag-cloud-link tag-link-57 tag-link-position-15" style="font-size: 14px;">Mac</a>
+                    <a href="http://www.dustyblog.cn/tag/qiniuyun/" class="tag-cloud-link tag-link-43 tag-link-position-16" style="font-size: 14px;">七牛云</a>
+                    <a href="http://www.dustyblog.cn/tag/%e5%af%8c%e6%96%87%e6%9c%ac/" class="tag-cloud-link tag-link-48 tag-link-position-17" style="font-size: 14px;">富文本</a>
+                    <a href="http://www.dustyblog.cn/tag/img/" class="tag-cloud-link tag-link-44 tag-link-position-18" style="font-size: 14px;">图床</a>
+                    <a href="http://www.dustyblog.cn/tag/%e7%ab%99%e7%82%b9%e5%9c%b0%e5%9b%be/" class="tag-cloud-link tag-link-47 tag-link-position-19" style="font-size: 14px;">站点地图</a>
+                    <a href="http://www.dustyblog.cn/tag/%e6%8b%a6%e6%88%aa%e5%99%a8/" class="tag-cloud-link tag-link-42 tag-link-position-20" style="font-size: 14px;">拦截器</a>
+                    <a href="http://www.dustyblog.cn/tag/git/" class="tag-cloud-link tag-link-54 tag-link-position-21" style="font-size: 14px;">Git</a>
+                    <a href="http://www.dustyblog.cn/tag/spring/" class="tag-cloud-link tag-link-37 tag-link-position-22" style="font-size: 14px;">Spring</a>
+                    <a href="http://www.dustyblog.cn/tag/%e7%9f%a5%e6%9b%b4%e9%b8%9f/" class="tag-cloud-link tag-link-52 tag-link-position-23" style="font-size: 14px;">知更鸟</a>
+                    <a href="http://www.dustyblog.cn/tag/bootstrap/" class="tag-cloud-link tag-link-38 tag-link-position-24" style="font-size: 14px;">Bootstrap</a>
+                    <a href="http://www.dustyblog.cn/tag/wordpress/" class="tag-cloud-link tag-link-33 tag-link-position-25" style="font-size: 14px;">Wordpress</a>	<div class="clear"></div>
+                </div>
+
+                <div class="clear"></div>
+            </aside><aside id="hot_post-10" class="widget hot_post wow fadeInUp" data-wow-delay="0.3s">
+                <h3 class="widget-title"><i class="fa fa-bars"></i>大家喜欢</h3>
+                <div id="hot_post_widget">
+                    <ul>
+
+                        <li><span class="li-icon li-icon-1">1</span><a href="http://www.dustyblog.cn/470.html">《陋室铭》衍生版</a></li>
+                        <li><span class="li-icon li-icon-2">2</span><a href="http://www.dustyblog.cn/461.html">ElasticSearch （五）文档的增删改查及批量增加</a></li>
+                        <li><span class="li-icon li-icon-3">3</span><a href="http://www.dustyblog.cn/356.html">Git 进阶（五）：Git 实战 — 上传本地项目到 Github</a></li>
+                        <li><span class="li-icon li-icon-4">4</span><a href="http://www.dustyblog.cn/527.html">程序员必背调试工具：Postman</a></li>
+                        <li><span class="li-icon li-icon-5">5</span><a href="http://www.dustyblog.cn/496.html">ElasticSearch （六）Java 客户端常见的文档查询操作</a></li>
+                    </ul>
+                </div>
+
+                <div class="clear"></div>
+            </aside>
+        </div>
+    </div>
+
+    <div class="clear"></div>
+</div><!-- .site-content -->
+
+<div class="clear"></div>
+
+<div id="footer-widget-box" class="site-footer wow fadeInUp" data-wow-delay="0.3s">
+    <div class="footer-widget">
+        <aside id="custom_html-7" class="widget_text widget widget_custom_html wow fadeInUp" data-wow-delay="0.3s">
+            <div class="textwidget custom-html-widget">
+                <div class="clear blog-footer">
+                    <div class="container">
+                        <div class="col-xs-12 col-sm-4 col-md-4 text-left fade-in">
+                            <h4>页面导航</h4>
+                            <ul class="list-unstyled list-inline">
+                                <li>
+                                    <a href="http://www.dustyblog.cn/friendlylinks.html" target="_blank" title="" data-toggle="tooltip" data-placement="bottom" rel="external nofollow" data-original-title="友链列表"><i class="fa fa-fw fa-link"></i>&nbsp;友链列表</a>
+                                </li>
+                                <li>
+                                    <a href="http://www.dustyblog.cn/messageboard.html" target="_blank" title="" data-toggle="tooltip" data-placement="bottom" rel="external nofollow" data-original-title="留言板"><i class="fa fa-fw fa-comments-o"></i>&nbsp;留言板</a>
+                                </li>
+                                <li>
+                                    <a href="http://www.dustyblog.cn/history.html" target="_blank" title="" data-toggle="tooltip" data-placement="bottom" rel="external nofollow" data-original-title="网站历程"><i class="fa fa-globe fa-fw fa-spin"></i>&nbsp;网站历程</a>
+                                </li>
+                                <li>
+                                    <a href="http://www.dustyblog.cn/articlelist.html" target="_blank" title="" data-toggle="tooltip" data-placement="bottom" data-original-title="文章归档"><i class="fa fa-folder-o fa-fw"></i>&nbsp;文章归档</a>
+                                </li>
+                                <li>
+                                    <a href="http://www.dustyblog.cn/readers.html" title="" data-toggle="tooltip" data-placement="bottom" data-original-title="读者墙"><i class="fa fa-fw fa-user-o"></i>&nbsp;读者墙</a>
+                                </li>
+                                <li>
+                                    <a href="http://www.dustyblog.cn/tags.html" title="" data-toggle="tooltip" data-placement="bottom" data-original-title="全部标签"><i class="fa fa-tags fa-fw"></i>&nbsp;全部标签</a>
+                                </li>
+                                <li>
+                                    <a href="http://www.dustyblog.cn/code-highlighting.html" title="" data-toggle="tooltip" data-placement="bottom" data-original-title="代码高亮"><i class="fa fa-fw fa-code "></i>&nbsp;代码高亮</a>
+                                </li>
+                                <li>
+                                    <a href="http://www.dustyblog.cn/collection.html" title="" data-toggle="tooltip" data-placement="bottom" data-original-title="收藏夹"><i class="fa fa-fire fa-fw red"></i>&nbsp;收藏夹</a>
+                                </li>
+                                <li>
+                                    <a href="https://portal.qiniu.com/signup?code=3lptvlv5vvihe" title="" data-toggle="tooltip" data-placement="bottom" data-original-title="加入七牛"><i class="fa fa-telegram fa-fw"></i>&nbsp;加入七牛</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div><div class="clear"></div>
+

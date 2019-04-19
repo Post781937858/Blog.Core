@@ -1,0 +1,239 @@
+﻿
+@{
+    ViewBag.Title = "南音雨阁|一个.NET程序员的个人博客网站";
+    ViewBag.Hove = "Home";
+    Layout = "~/Views/Shared/_LopLayout.cshtml";
+}
+@model List<Blog.Model.DataModel.Article>
+<div id="search-main" class="">
+    <div class="searchbar">
+        <form method="get" id="searchform" action="http://">
+            <span>
+                <input type="text" value="" name="s" id="s" placeholder="输入搜索内容" required="">
+                <button type="submit" id="searchsubmit">搜索</button>
+            </span>
+        </form>
+    </div>
+    <div class="clear"></div>
+</div>
+<nav class="breadcrumb">
+    <div class="bull"><i class="fa fa-volume-up"></i></div><div id="scrolldiv">
+        <div class="scrolltext">
+            <ul style="margin-top: 0px;">
+                <li class="scrolltext-title"><a href="javascript:" rel="bookmark">之前网站崩溃，数据全部丢失！</a></li>
+                <li class="scrolltext-title"><a href="javascript:" rel="bookmark">博主想恶补一下基础，最近更新的内容可能偏基础一些。</a></li>
+            </ul>
+        </div>
+    </div>
+    <script type="text/javascript">$(document).ready(function () { $("#scrolldiv").textSlider({ line: 1, speed: 300, timer: 6000 }); })</script>
+</nav>
+
+<div id="content" class="site-content" style="transform: none;">
+    <div id="primary" class="content-area">
+        <main id="main" class="site-main" role="main">
+            <div class="orderby"><ul><li class="order"><a href="javascript:void(0)" title="文章排序"><i class="fa fa-sort-amount-asc"></i></a></li></ul><ul class="order-box"><li><a href="javascript:" rel="nofollow" title="按日期排序"><i class="fa fa-calendar-minus-o"></i></a></li><li><a href="javascript:" rel="nofollow" title="随机排序"><i class="fa fa-random"></i></a></li><li><a href="javascript:" rel="nofollow" title="按评论排序"><i class="fa fa-comment-o"></i></a></li><li><a href="javascript:" rel="nofollow" title="按浏览排序"><i class="fa fa-eye"></i></a></li><li><a href="http://?order=zm_like" rel="nofollow" title="按点赞排序"><i class="fa fa-thumbs-up"></i></a></li></ul></div>
+            @foreach (var item in Model)
+            {
+                <article id="post-110" class="wow fadeInUp post-110 post type-post status-publish format-standard hentry category-java tag-spring tag-upload rvy" data-wow-delay="0.3s">
+
+                    <figure class="thumbnail">
+                        <a href="@Url.Action("detail", "article", new { id = item.ArticleID })"><img src="~/image/@item.CoverURL" alt="Spring MVC  图片上传及预览"></a><span class="cat"><a href="http://java/">.NET开发</a></span>
+                    </figure>
+
+                    <header class="entry-header">
+                        <h2 class="entry-title"><a href="@Url.Action("detail", "article", new { id = item.ArticleID })" rel="bookmark">@item.Title</a></h2>
+                    </header><!-- .entry-header -->
+
+                    <div class="entry-content">
+                        <div class="archive-content">
+                            @item.Synopsis
+                        </div>
+                        <span class="title-l"></span>
+
+                        <span class="entry-meta">
+                            <span class="date">2018年3月23日</span>
+                            <span class="views"><i class="fa fa-eye"></i> 186</span>
+                            <span class="views"><i class="fa fa-comment-o"></i> 152</span>
+
+                            @*<span class="comment"><a href="javascript:" rel=""><i class="fa fa-comment-o"></i> 发表评论</a></span>*@@*<span class="favorite-s"><a class="wpzm-link" href="http://page/4/?wpzmaction=add&amp;postid=110" title="收藏本文" rel="nofollow"> <i class="fa fa-heart-o"></i> <span>收藏</span></a></span>*@
+                        </span>
+
+                        <div class="clear"></div>
+                    </div><!-- .entry-content -->
+
+                    <span class="entry-more"><a href="@Url.Action("detail", "article", new { id = item.ArticleID })" rel="bookmark">阅读全文</a></span>
+                </article><!-- #post -->
+            }
+        </main><!-- .site-main -->
+
+        <nav id="nav-below">
+            <div class="nav-next"><a href="http://page/3/"></a></div>
+            <div class="nav-previous"></div>
+        </nav>
+
+        <nav class="navigation pagination" role="navigation">
+            <h2 class="screen-reader-text">文章导航</h2>
+            <div class="nav-links">
+                <a class="prev page-numbers" href="@(ViewBag.id!=1?(Url.Action("Index","Home",new { id=ViewBag.id-1})):(Url.Action("Index","Home",new { id=1})))"><i class="fa fa-angle-left"></i></a>
+                @for (int i = 1; i <= ViewBag.Count; i++)
+                {
+                    if (ViewBag.id == i)
+                    {
+                        <span aria-current="page" class="page-numbers current"><span class="screen-reader-text">第 </span>@i<span class="screen-reader-text"> 页</span></span>
+                    }
+                    else
+                    {
+                        <a class="page-numbers" href="@Url.Action("Index","Home",new { id=i})"><span class="screen-reader-text">第 </span>@i<span class="screen-reader-text"> 页</span></a>
+                    }
+                }
+               <a class="next page-numbers" href="@(ViewBag.id!=ViewBag.Count?(Url.Action("Index","Home",new { id=ViewBag.id+1})):(Url.Action("Index","Home",new { id=ViewBag.Count})))"><i class="fa fa-angle-right"></i></a>
+            </div>
+        </nav>
+    </div><!-- .content-area -->
+
+    <div id="sidebar" class="widget-area all-sidebar" style="position: relative; overflow: visible; box-sizing: border-box; min-height: 1px;">
+
+
+
+
+        <div class="theiaStickySidebar" style="padding-top: 0px; padding-bottom: 1px; position: static; transform: none; top: 0px; left: 1182.63px;">
+            <aside id="custom_html-3" class="widget_text widget widget_custom_html wow fadeInUp" data-wow-delay="0.3s">
+                <h3 class="widget-title"><i class="fa fa-bars"></i>关于博主</h3><div class="textwidget custom-html-widget">
+                    <div id="feed_widget">
+                        <div class="feed-about">
+                            <div class="aboutme">
+                                <div class="ab_avatar"><img id="ab_avator" src="~/image/advator.jpg"></div>
+                                <div class="ab_con">
+                                    <p>于风雨中唱歌，在泥泞中前行！</p>
+                                </div>
+                            </div>
+                            <ul class="widget-icon">
+                                <li class="weixin auto-shake" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-html="true">
+                                    <a class="tag-icon" title="van1251787298" rel="external nofollow"><i class="fa fa-weixin"></i></a>
+                                </li>
+                                <li class="tsina auto-shake">
+                                    <a class="tag-icon" href="https://weibo.com/5063148392/profile?topnav=1&amp;is_hot=1" title="我的微博" target="_blank" rel="external nofollow"><i class="fa fa-weibo"></i></a>
+                                </li>
+                                <li class="tqq auto-shake">
+                                    <a class="tag-icon" href="https://blog.csdn.net/qq_41690817" title="我的CSDN" target="blank" rel="external nofollow"><i class="fa fa-rss"></i></a>
+                                </li>
+                                <li class="github auto-shake">
+                                    <a class="tag-icon" href="https://github.com/van1993" title="我的 Github" target="_blank" rel="external nofollow"><i class="fa fa-github"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div><div class="clear"></div>
+            </aside><aside id="cx_tag_cloud-3" class="widget cx_tag_cloud wow fadeInUp" data-wow-delay="0.3s">
+                <h3 class="widget-title"><i class="fa fa-bars"></i>标签云</h3>	<div class="tagcloud">
+                    <a href="http://tag/elasticsearch/" class="tag-cloud-link tag-link-58 tag-link-position-1" style="font-size: 14px;">ElasticSearch</a>
+                    <a href="http://tag/upload/" class="tag-cloud-link tag-link-45 tag-link-position-2" style="font-size: 14px;">上传文件</a>
+                    <a href="http://tag/%e7%ab%99%e7%82%b9%e5%9c%b0%e5%9b%be/" class="tag-cloud-link tag-link-47 tag-link-position-3" style="font-size: 14px;">站点地图</a>
+                    <a href="http://tag/js/" class="tag-cloud-link tag-link-40 tag-link-position-4" style="font-size: 14px;">JS</a>
+                    <a href="http://tag/bootstrap/" class="tag-cloud-link tag-link-38 tag-link-position-5" style="font-size: 14px;">Bootstrap</a>
+                    <a href="http://tag/%e5%af%8c%e6%96%87%e6%9c%ac/" class="tag-cloud-link tag-link-48 tag-link-position-6" style="font-size: 14px;">富文本</a>
+                    <a href="http://tag/img/" class="tag-cloud-link tag-link-44 tag-link-position-7" style="font-size: 14px;">图床</a>
+                    <a href="http://tag/%e6%8e%92%e5%ba%8f%e7%ae%97%e6%b3%95/" class="tag-cloud-link tag-link-56 tag-link-position-8" style="font-size: 14px;">排序算法</a>
+                    <a href="http://tag/git/" class="tag-cloud-link tag-link-54 tag-link-position-9" style="font-size: 14px;">Git</a>
+                    <a href="http://tag/linux/" class="tag-cloud-link tag-link-55 tag-link-position-10" style="font-size: 14px;">Linux</a>
+                    <a href="http://tag/nginx/" class="tag-cloud-link tag-link-36 tag-link-position-11" style="font-size: 14px;">Nginx</a>
+                    <a href="http://tag/css/" class="tag-cloud-link tag-link-41 tag-link-position-12" style="font-size: 14px;">CSS</a>
+                    <a href="http://tag/%e6%8b%a6%e6%88%aa%e5%99%a8/" class="tag-cloud-link tag-link-42 tag-link-position-13" style="font-size: 14px;">拦截器</a>
+                    <a href="http://tag/%e6%8a%b1%e6%80%a8/" class="tag-cloud-link tag-link-35 tag-link-position-14" style="font-size: 14px;">抱怨</a>
+                    <a href="http://tag/%e6%9c%8d%e5%8a%a1%e5%99%a8/" class="tag-cloud-link tag-link-49 tag-link-position-15" style="font-size: 14px;">服务器</a>
+                    <a href="http://tag/wordpress/" class="tag-cloud-link tag-link-33 tag-link-position-16" style="font-size: 14px;">Wordpress</a>
+                    <a href="http://tag/qiniuyun/" class="tag-cloud-link tag-link-43 tag-link-position-17" style="font-size: 14px;">七牛云</a>
+                    <a href="http://tag/%e7%9f%a5%e6%9b%b4%e9%b8%9f/" class="tag-cloud-link tag-link-52 tag-link-position-18" style="font-size: 14px;">知更鸟</a>
+                    <a href="http://tag/%e6%b3%a8%e8%a7%a3/" class="tag-cloud-link tag-link-39 tag-link-position-19" style="font-size: 14px;">注解</a>
+                    <a href="http://tag/spring/" class="tag-cloud-link tag-link-37 tag-link-position-20" style="font-size: 14px;">Spring</a>	<div class="clear"></div>
+                </div>
+
+                <div class="clear"></div>
+            </aside><aside id="hot_post-6" class="widget hot_post wow fadeInUp" data-wow-delay="0.3s">
+                <h3 class="widget-title"><i class="fa fa-bars"></i>大家喜欢</h3>
+                <div id="hot_post_widget">
+                    <ul>
+
+                        <li><span class="li-icon li-icon-1">1</span><a href="http://198.html">深入浅出 Nginx</a></li>
+                        <li><span class="li-icon li-icon-2">2</span><a href="http://1.html">WordPress：无法创建目录的正确解决办法</a></li>
+                        <li><span class="li-icon li-icon-3">3</span><a href="http://78.html">记：一次彻彻底底的网站崩溃</a></li>
+                        <li><span class="li-icon li-icon-4">4</span><a href="http://52.html">煮酒慰风尘</a></li>
+                        <li><span class="li-icon li-icon-5">5</span><a href="http://131.html">免插件生成站点地图：sitemap.xml</a></li>
+                    </ul>
+                </div>
+
+                <div class="clear"></div>
+            </aside><aside id="recent_comments-3" class="widget recent_comments wow fadeInUp" data-wow-delay="0.3s">
+                <h3 class="widget-title"><i class="fa fa-bars"></i>近期评论</h3>
+                <div id="message" class="message-widget">
+                    <ul>
+                        @*@foreach (var item in collection)
+                        {
+                            <li>
+                                <a href="http://messageboard.html#anchor-comment-64" title="留言板" rel="external nofollow">
+                                    <img src="~/image/50e0daa862c9f574862c069cb05212ba" class="avatar avatar-128" height="128" width="128">						<span class="comment_author"><strong>请输入您的QQ号</strong></span>
+                                    博客名称：龙行博客
+                                    博客地址：https://www.liaotaoo.cn
+                                    博客类型：技术博客
+                                </a>
+                            </li>
+                        }*@
+                        <li>
+                            <a href="http://messageboard.html#anchor-comment-64" title="留言板" rel="external nofollow">
+                                <img src="~/image/50e0daa862c9f574862c069cb05212ba" class="avatar avatar-128" height="128" width="128">						<span class="comment_author"><strong>请输入您的QQ号</strong></span>
+                                博客名称：龙行博客
+                                博客地址：https://www.liaotaoo.cn
+                                博客类型：技术博客
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://messageboard.html#anchor-comment-63" title="留言板" rel="external nofollow">
+                                <img src="~/image/858e2c65a73a294a40fbc5a4c07e56a9" class="avatar avatar-128" height="128" width="128">						<span class="comment_author"><strong>宋佳乐</strong></span>
+                                宋佳乐来过
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://546.html#anchor-comment-61" title="西罗列传" rel="external nofollow">
+                                <img src="~/image/d07193f9df61ac60442e810d0710e754" class="avatar avatar-128" height="128" width="128">						<span class="comment_author"><strong>ZAERA</strong></span>
+                                有才，古文我是写不来的
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://546.html#anchor-comment-59" title="西罗列传" rel="external nofollow">
+                                <img src="~/image/376b9aaf18759ac1406aa8393b93e7c1" class="avatar avatar-128" height="128" width="128">						<span class="comment_author"><strong>米扑博客</strong></span>
+                                哈哈 文采斐然  一袋才子
+                            </a>
+                        </li>
+                        <li style="border: none;">
+                            <a href="http://527.html#anchor-comment-58" title="程序员必背调试工具：Postman" rel="external nofollow">
+                                <img src="~/image/376b9aaf18759ac1406aa8393b93e7c1" class="avatar avatar-128" height="128" width="128">						<span class="comment_author"><strong>米扑博客</strong></span>
+                                Advanced REST Client 和 Postman 都很好用，赞一个
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="clear"></div>
+            </aside>
+        </div>
+    </div>
+
+    <div class="clear"></div>
+</div><!-- .site-content -->
+
+<div class="clear"></div>
+<div class="links-box">
+    <div id="links">
+        <ul class="lx7"><li class="link-f link-name wow fadeInUp" data-wow-delay="0.3s"><a href="https://www.zhyd.me/" target="_blank">张亚东博客</a></li></ul>
+        <ul class="lx7"><li class="link-f link-name wow fadeInUp" data-wow-delay="0.3s"><a href="http://www.itoak.cn/" target="_blank">Java开发乐园</a></li></ul>
+        <ul class="lx7"><li class="link-f link-name wow fadeInUp" data-wow-delay="0.3s"><a href="https://boke112.com/" target="_blank">boke112导航</a></li></ul>
+        <ul class="lx7"><li class="link-f link-name wow fadeInUp" data-wow-delay="0.3s"><a href="https://imxxz.cn/" target="_blank">小学长</a></li></ul>
+        <ul class="lx7"><li class="link-f link-name wow fadeInUp" data-wow-delay="0.3s"><a href="http://www.itarea.cn/" target="_blank">IT大本营</a></li></ul>
+        <ul class="lx7"><li class="link-f link-name wow fadeInUp" data-wow-delay="0.3s"><a href="https://csskr.com/" title="专注收藏和分享精品导航！" target="_blank">前端氪导航</a></li></ul>
+        <ul class="lx7"><li class="link-f link-name wow fadeInUp" data-wow-delay="0.3s"><a href="https://blog.mimvp.com/" target="_blank">米扑博客</a></li></ul>
+        <ul class="lx7"><li class="link-f link-name wow fadeInUp" data-wow-delay="0.3s"><a href="https://winmx.cn/" target="_blank">冰凝梦想</a></li></ul>
+        <ul class="lx7"><li class="link-f link-name wow fadeInUp" data-wow-delay="0.3s"><a href="https://www.dailyboke.com/" target="_blank">每日博客</a></li></ul>
+        <ul class="lx7"><li class="link-f link-name wow fadeInUp" data-wow-delay="0.3s"><a href="https://www.liaotaoo.cn/" target="_blank">龙行博客</a></li></ul>
+        <ul class="lx7"><li class="link-f wow fadeInUp" data-wow-delay="0.3s"><a href="http://friendlylinks.html" target="_blank" title="全部链接">更多链接<i class="icon-li"></i></a></li></ul>		<div class="clear"></div>
+    </div>
+</div>
+
